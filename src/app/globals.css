@@ -1,0 +1,282 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Synapse Design Tokens ──────────────────────────────────────── */
+
+@theme inline {
+  /* Core surfaces */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Brand */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  /* Secondary surfaces */
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  /* Muted */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  /* Accent (brand blue — used strategically) */
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Semantic */
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+
+  /* Structure */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Charts */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Typography */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-inter);
+
+  /* Radius system — moderate, coherent */
+  --radius-sm: calc(var(--radius) * 0.5);   /* 3px  */
+  --radius-md: calc(var(--radius) * 0.75);  /* 4.5px */
+  --radius-lg: var(--radius);               /* 6px  */
+  --radius-xl: calc(var(--radius) * 1.5);   /* 9px  */
+  --radius-2xl: calc(var(--radius) * 2);    /* 12px */
+  --radius-3xl: calc(var(--radius) * 2.8);  /* 16.8px */
+}
+
+/* ─── Light Mode ─────────────────────────────────────────────────── */
+
+:root {
+  /* Base radius: 6px — moderate, not pill-shaped */
+  --radius: 0.375rem;
+
+  /* Surfaces */
+  --background: oklch(0.99 0 0);          /* near-white */
+  --foreground: oklch(0.1 0 0);           /* near-black */
+
+  --card: oklch(1 0 0);                   /* pure white cards */
+  --card-foreground: oklch(0.1 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1 0 0);
+
+  /* Primary — deep neutral, buttons use accent */
+  --primary: oklch(0.13 0 0);             /* near-black */
+  --primary-foreground: oklch(0.99 0 0);  /* white */
+
+  --secondary: oklch(0.97 0 0);           /* very light gray */
+  --secondary-foreground: oklch(0.2 0 0);
+
+  --muted: oklch(0.96 0 0);               /* subtle muted bg */
+  --muted-foreground: oklch(0.5 0 0);     /* 50% gray */
+
+  /* Accent — Synapse blue #2563eb → OKLCH equivalent */
+  --accent: oklch(0.53 0.215 261);        /* blue-600 equivalent */
+  --accent-foreground: oklch(1 0 0);      /* white */
+
+  /* Semantic */
+  --destructive: oklch(0.58 0.22 25);     /* red */
+  --success: oklch(0.53 0.165 155);       /* green */
+  --warning: oklch(0.68 0.17 55);         /* amber */
+  --info: oklch(0.57 0.18 231);           /* sky */
+
+  /* Structure */
+  --border: oklch(0.9 0 0);              /* very subtle */
+  --input: oklch(0.92 0 0);
+  --ring: oklch(0.53 0.215 261 / 30%);   /* accent ring, softer */
+
+  /* Charts — measured data viz palette */
+  --chart-1: oklch(0.53 0.215 261);      /* blue */
+  --chart-2: oklch(0.53 0.165 155);      /* green */
+  --chart-3: oklch(0.68 0.17 55);        /* amber */
+  --chart-4: oklch(0.58 0.18 305);       /* purple */
+  --chart-5: oklch(0.57 0.18 16);        /* coral */
+
+  /* Sidebar — slightly off-background */
+  --sidebar: oklch(0.975 0 0);
+  --sidebar-foreground: oklch(0.15 0 0);
+  --sidebar-primary: oklch(0.13 0 0);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0.15 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.53 0.215 261 / 30%);
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────── */
+
+.dark {
+  --background: oklch(0.1 0 0);          /* near-black */
+  --foreground: oklch(0.95 0 0);         /* near-white */
+
+  --card: oklch(0.13 0 0);
+  --card-foreground: oklch(0.95 0 0);
+
+  --popover: oklch(0.15 0 0);
+  --popover-foreground: oklch(0.95 0 0);
+
+  --primary: oklch(0.95 0 0);
+  --primary-foreground: oklch(0.13 0 0);
+
+  --secondary: oklch(0.18 0 0);
+  --secondary-foreground: oklch(0.9 0 0);
+
+  --muted: oklch(0.17 0 0);
+  --muted-foreground: oklch(0.58 0 0);
+
+  /* Accent lightened for dark bg */
+  --accent: oklch(0.62 0.195 261);       /* blue slightly brighter */
+  --accent-foreground: oklch(1 0 0);
+
+  --destructive: oklch(0.67 0.2 22);
+  --success: oklch(0.62 0.155 152);
+  --warning: oklch(0.76 0.155 52);
+  --info: oklch(0.65 0.165 229);
+
+  --border: oklch(0.22 0 0);
+  --input: oklch(0.22 0 0);
+  --ring: oklch(0.62 0.195 261 / 30%);
+
+  --chart-1: oklch(0.62 0.195 261);
+  --chart-2: oklch(0.62 0.155 152);
+  --chart-3: oklch(0.76 0.155 52);
+  --chart-4: oklch(0.67 0.17 302);
+  --chart-5: oklch(0.65 0.17 14);
+
+  --sidebar: oklch(0.12 0 0);
+  --sidebar-foreground: oklch(0.9 0 0);
+  --sidebar-primary: oklch(0.62 0.195 261);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.18 0 0);
+  --sidebar-accent-foreground: oklch(0.9 0 0);
+  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-ring: oklch(0.62 0.195 261 / 30%);
+}
+
+/* ─── Base Layer ─────────────────────────────────────────────────── */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50 box-border;
+  }
+
+  html {
+    @apply h-full antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground min-h-full;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.9375rem; /* 15px — slightly compact, professional */
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium tracking-tight;
+    line-height: 1.25;
+  }
+
+  /* Remove default focus outline replaced by ring system */
+  :focus-visible {
+    outline: none;
+  }
+
+  /* Scrollbar styling — subtle */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.8 0 0);
+    border-radius: 3px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: oklch(0.3 0 0);
+  }
+}
+
+/* ─── Utility layer ──────────────────────────────────────────────── */
+
+@layer utilities {
+  /* Synapse accent text — blue, used for links / highlights */
+  .text-accent { color: var(--accent); }
+  .bg-accent    { background-color: var(--accent); }
+
+  /* Semantic color utilities */
+  .text-success { color: var(--success); }
+  .text-warning { color: var(--warning); }
+  .text-info    { color: var(--info); }
+
+  .bg-success\/10 { background-color: oklch(from var(--success) l c h / 10%); }
+  .bg-warning\/10 { background-color: oklch(from var(--warning) l c h / 10%); }
+  .bg-info\/10    { background-color: oklch(from var(--info) l c h / 10%); }
+
+  /* Synapse brand gradient — text only, used on wordmark */
+  .synapse-wordmark {
+    background: linear-gradient(
+      135deg,
+      oklch(0.1 0 0) 0%,
+      oklch(0.53 0.215 261) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .synapse-wordmark {
+    background: linear-gradient(
+      135deg,
+      oklch(0.95 0 0) 0%,
+      oklch(0.72 0.18 261) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Subtle grid dot pattern for hero areas */
+  .dot-pattern {
+    background-image: radial-gradient(oklch(0.85 0 0) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .dark .dot-pattern {
+    background-image: radial-gradient(oklch(0.22 0 0) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
